@@ -11,27 +11,29 @@ import com.shreysambhwani.fleetapp.repositories.StateRepository;
 
 @Service
 public class StateService {
-
+	
+	
 	@Autowired
 	private StateRepository stateRepository;
 	
-	//Get All States
-	public List<State> findAll(){
+	//Return list of states
+	public List<State> getStates(){
 		return stateRepository.findAll();
-	}	
+	}
 	
-	//Get State By Id
+	//SAve new state
+	public void save(State state) {
+		stateRepository.save(state);
+	}
+	
+	//get by id
 	public Optional<State> findById(int id) {
 		return stateRepository.findById(id);
-	}	
-	
-	//Delete State
-	public void delete(int id) {
+	}
+
+	public void delete(Integer id) {
 		stateRepository.deleteById(id);
 	}
 	
-	//Update State
-	public void save( State state) {
-		stateRepository.save(state);
-	}
+	
 }

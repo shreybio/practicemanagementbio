@@ -55,7 +55,6 @@ public class CommonObject extends Auditable<String>{
 	@Override
 	public String toString() {
 		return "CommonObject [id=" + id + ", description=" + description + ", details=" + details + "]";
-	}
-	
+	}	
 	
 }

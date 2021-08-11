@@ -11,27 +11,29 @@ import com.shreysambhwani.fleetapp.repositories.VehicleMaintenanceRepository;
 
 @Service
 public class VehicleMaintenanceService {
-
+	
+	
 	@Autowired
 	private VehicleMaintenanceRepository vehicleMaintenanceRepository;
 	
-	//Get All VehicleMaintenances
-	public List<VehicleMaintenance> findAll(){
+	//Return list of vehicleMaintenances
+	public List<VehicleMaintenance> getVehicleMaintenances(){
 		return vehicleMaintenanceRepository.findAll();
-	}	
-	
-	//Get VehicleMaintenance By Id
-	public Optional<VehicleMaintenance> findById(int id) {
-		return vehicleMaintenanceRepository.findById(id);
-	}	
-	
-	//Delete VehicleMaintenance
-	public void delete(int id) {
-		vehicleMaintenanceRepository.deleteById(id);
 	}
 	
-	//Update VehicleMaintenance
+	//SAve new vehicleMaintenance
 	public void save(VehicleMaintenance vehicleMaintenance) {
 		vehicleMaintenanceRepository.save(vehicleMaintenance);
 	}
+	
+	//get by id
+	public Optional<VehicleMaintenance> findById(int id) {
+		return vehicleMaintenanceRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleMaintenanceRepository.deleteById(id);
+	}
+
+
 }

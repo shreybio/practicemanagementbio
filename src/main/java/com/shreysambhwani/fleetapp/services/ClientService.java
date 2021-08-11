@@ -15,24 +15,23 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 	
-	//Get All Clients
-	public List<Client> findAll(){
+	//Return list of clients
+	public List<Client> getClients(){
 		return clientRepository.findAll();
-	}	
-	
-	//Get Client By Id
-	public Optional<Client> findById(int id) {
-		return clientRepository.findById(id);
-	}	
-	
-	//Delete Client
-	public void delete(int id) {
-		clientRepository.deleteById(id);
 	}
 	
-	//Update Client
-	public void save( Client client) {
+	//SAve new client
+	public void save(Client client) {
 		clientRepository.save(client);
+	}
+	
+	//get by id
+	public Optional<Client> findById(int id) {
+		return clientRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		clientRepository.deleteById(id);
 	}
 
 }

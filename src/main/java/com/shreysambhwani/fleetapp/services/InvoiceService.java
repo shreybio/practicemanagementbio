@@ -15,24 +15,23 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceRepository invoiceRepository;
 	
-	//Get All Invoices
-	public List<Invoice> findAll(){
+	//Return list of invoices
+	public List<Invoice> getInvoices(){
 		return invoiceRepository.findAll();
-	}	
-	
-	//Get Invoice By Id
-	public Optional<Invoice> findById(int id) {
-		return invoiceRepository.findById(id);
-	}	
-	
-	//Delete Invoice
-	public void delete(int id) {
-		invoiceRepository.deleteById(id);
 	}
 	
-	//Update Invoice
+	//SAve new invoice
 	public void save(Invoice invoice) {
 		invoiceRepository.save(invoice);
+	}
+	
+	//get by id
+	public Optional<Invoice> findById(int id) {
+		return invoiceRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		invoiceRepository.deleteById(id);
 	}
 
 }

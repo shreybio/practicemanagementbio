@@ -4,7 +4,9 @@ import java.util.Optional;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-public class SpringSecurityAuditorAware implements AuditorAware<String>{
+
+public class SpringSecurityAuditorAware implements AuditorAware<String> {
+
 	@Override
 	public Optional<String> getCurrentAuditor() {
 		
@@ -14,4 +16,5 @@ public class SpringSecurityAuditorAware implements AuditorAware<String>{
 
 		return Optional.ofNullable(username).filter(s -> !s.isEmpty());
 	}
+
 }

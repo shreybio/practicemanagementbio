@@ -11,28 +11,26 @@ import com.shreysambhwani.fleetapp.repositories.VehicleStatusRepository;
 
 @Service
 public class VehicleStatusService {
-	
 	@Autowired
 	private VehicleStatusRepository vehicleStatusRepository;
 	
-	//Get All VehicleStatuss
-	public List<VehicleStatus> findAll(){
+	//Return list of countries
+	public List<VehicleStatus> getVehicleStatuses(){
 		return vehicleStatusRepository.findAll();
-	}	
-	
-	//Get VehicleStatus By Id
-	public Optional<VehicleStatus> findById(int id) {
-		return vehicleStatusRepository.findById(id);
-	}	
-	
-	//Delete VehicleStatus
-	public void delete(int id) {
-		vehicleStatusRepository.deleteById(id);
 	}
 	
-	//Update VehicleStatus
+	//SAve new VehicleStatus
 	public void save(VehicleStatus vehicleStatus) {
 		vehicleStatusRepository.save(vehicleStatus);
+	}
+	
+	//get by id
+	public Optional<VehicleStatus> findById(int id) {
+		return vehicleStatusRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleStatusRepository.deleteById(id);
 	}
 
 }

@@ -15,24 +15,25 @@ public class VehicleHireService {
 	@Autowired
 	private VehicleHireRepository vehicleHireRepository;
 	
-	//Get All VehicleHires
-	public List<VehicleHire> findAll(){
+	//Return list of Vehicle Hire
+	public List<VehicleHire> getVehicleHires(){
 		return vehicleHireRepository.findAll();
-	}	
-	
-	//Get VehicleHire By Id
-	public Optional<VehicleHire> findById(int id) {
-		return vehicleHireRepository.findById(id);
-	}	
-	
-	//Delete VehicleHire
-	public void delete(int id) {
-		vehicleHireRepository.deleteById(id);
 	}
 	
-	//Update VehicleHire
+	//SAve new VehicleHire
 	public void save(VehicleHire vehicleHire) {
 		vehicleHireRepository.save(vehicleHire);
 	}
+	
+	//get by id
+	public Optional<VehicleHire> findById(int id) {
+		return vehicleHireRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleHireRepository.deleteById(id);
+	}
+
 
 }
+

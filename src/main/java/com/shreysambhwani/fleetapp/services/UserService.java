@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.shreysambhwani.fleetapp.models.User;
 import com.shreysambhwani.fleetapp.repositories.UserRepository;
 
+
 @Service
 public class UserService {
 	

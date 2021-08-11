@@ -11,28 +11,26 @@ import com.shreysambhwani.fleetapp.repositories.VehicleMakeRepository;
 
 @Service
 public class VehicleMakeService {
-	
 	@Autowired
 	private VehicleMakeRepository vehicleMakeRepository;
 	
-	//Get All VehicleMakes
-	public List<VehicleMake> findAll(){
+	//Return list of countries
+	public List<VehicleMake> getVehicleMakes(){
 		return vehicleMakeRepository.findAll();
-	}	
-	
-	//Get VehicleMake By Id
-	public Optional<VehicleMake> findById(int id) {
-		return vehicleMakeRepository.findById(id);
-	}	
-	
-	//Delete VehicleMake
-	public void delete(int id) {
-		vehicleMakeRepository.deleteById(id);
 	}
 	
-	//Update VehicleMake
+	//SAve new VehicleMake
 	public void save(VehicleMake vehicleMake) {
 		vehicleMakeRepository.save(vehicleMake);
+	}
+	
+	//get by id
+	public Optional<VehicleMake> findById(int id) {
+		return vehicleMakeRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleMakeRepository.deleteById(id);
 	}
 
 }

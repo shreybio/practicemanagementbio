@@ -31,10 +31,6 @@ public class State {
 	@JoinColumn(name="countryid", insertable=false, updatable=false)
 	private Country country;
 	
-	private Integer countryid;
-	
-	private String details;
-
 	public Integer getId() {
 		return id;
 	}
@@ -90,5 +86,10 @@ public class State {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+
+	private Integer countryid;
+	
+	private String details;
 	
 }
+

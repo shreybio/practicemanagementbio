@@ -11,28 +11,27 @@ import com.shreysambhwani.fleetapp.repositories.InvoiceStatusRepository;
 
 @Service
 public class InvoiceStatusService {
-	
 	@Autowired
 	private InvoiceStatusRepository invoiceStatusRepository;
 	
-	//Get All InvoiceStatuss
-	public List<InvoiceStatus> findAll(){
+	//Return list of countries
+	public List<InvoiceStatus> getInvoiceStatuses(){
 		return invoiceStatusRepository.findAll();
-	}	
-	
-	//Get InvoiceStatus By Id
-	public Optional<InvoiceStatus> findById(int id) {
-		return invoiceStatusRepository.findById(id);
-	}	
-	
-	//Delete InvoiceStatus
-	public void delete(int id) {
-		invoiceStatusRepository.deleteById(id);
 	}
 	
-	//Update InvoiceStatus
-	public void save( InvoiceStatus invoiceStatus) {
+	//SAve new InvoiceStatus
+	public void save(InvoiceStatus invoiceStatus) {
 		invoiceStatusRepository.save(invoiceStatus);
+	}
+	
+	//get by id
+	public Optional<InvoiceStatus> findById(int id) {
+		return invoiceStatusRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		invoiceStatusRepository.deleteById(id);
 	}
 
 }
+

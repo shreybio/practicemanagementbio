@@ -11,27 +11,26 @@ import com.shreysambhwani.fleetapp.repositories.JobTitleRepository;
 
 @Service
 public class JobTitleService {
-
 	@Autowired
 	private JobTitleRepository jobTitleRepository;
 	
-	//Get All JobTitles
-	public List<JobTitle> findAll(){
+	//Return list of countries
+	public List<JobTitle> getJobTitles(){
 		return jobTitleRepository.findAll();
-	}	
-	
-	//Get JobTitle By Id
-	public Optional<JobTitle> findById(int id) {
-		return jobTitleRepository.findById(id);
-	}	
-	
-	//Delete JobTitle
-	public void delete(int id) {
-		jobTitleRepository.deleteById(id);
 	}
 	
-	//Update JobTitle
+	//SAve new JobTitle
 	public void save(JobTitle jobTitle) {
 		jobTitleRepository.save(jobTitle);
 	}
+	
+	//get by id
+	public Optional<JobTitle> findById(int id) {
+		return jobTitleRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		jobTitleRepository.deleteById(id);
+	}
+
 }

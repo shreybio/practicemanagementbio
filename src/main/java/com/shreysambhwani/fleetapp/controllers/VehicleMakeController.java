@@ -12,44 +12,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shreysambhwani.fleetapp.models.VehicleMake;
 import com.shreysambhwani.fleetapp.services.VehicleMakeService;
-
+import java.util.List;
 @Controller
 public class VehicleMakeController {
-	
-	@Autowired private VehicleMakeService vehicleMakeService;
-	
-	//Get All VehicleMakes
-	@GetMapping("vehiclemakes")
-	public String findAll(Model model){		
-		model.addAttribute("vehicleMakes", vehicleMakeService.findAll());
+
+	@Autowired  private VehicleMakeService vehicleMakeService;
+
+	@GetMapping("/vehicleMakes")
+	public String getStates(Model model) {		
+
+		List<VehicleMake> vehicleMakeList = vehicleMakeService.getVehicleMakes();
+		
+		model.addAttribute("vehicleMakes", vehicleMakeList);
 		return "vehicleMake";
 	}	
 	
-	@RequestMapping("vehicleMakes/findById") 
-	@ResponseBody
-	public Optional<VehicleMake> findById(Integer id)
-	{
-		return vehicleMakeService.findById(id);
-	}
-	
-	//Add VehicleMake
-	@PostMapping(value="vehicleMakes/addNew")
+	@PostMapping("/vehicleMakes/addNew")
 	public String addNew(VehicleMake vehicleMake) {
 		vehicleMakeService.save(vehicleMake);
 		return "redirect:/vehicleMakes";
+	}
+	
+	@RequestMapping("vehicleMakes/findById")
+	@ResponseBody
+	public Optional<VehicleMake> findById(int id) {
+	  return vehicleMakeService.findById(id);	
 	}	
 	
-	@RequestMapping(value="vehicleMakes/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/vehicleMakes/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(VehicleMake vehicleMake) {
 		vehicleMakeService.save(vehicleMake);
 		return "redirect:/vehicleMakes";
 	}
 	
-	@RequestMapping(value="vehicleMakes/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/vehicleMakes/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleMakeService.delete(id);
 		return "redirect:/vehicleMakes";
 	}
-
-
 }

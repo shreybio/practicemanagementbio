@@ -11,28 +11,27 @@ import com.shreysambhwani.fleetapp.repositories.ContactRepository;
 
 @Service
 public class ContactService {
-	
+
 	@Autowired
 	private ContactRepository contactRepository;
 	
-	//Get All Contacts
-	public List<Contact> findAll(){
+	//Return list of contacts
+	public List<Contact> getContacts(){
 		return contactRepository.findAll();
-	}	
+	}
 	
-	//Get Contact By Id
+	//SAve new contact
+	public void save(Contact contact) {
+		contactRepository.save(contact);
+	}
+	
+	//get by id
 	public Optional<Contact> findById(int id) {
 		return contactRepository.findById(id);
-	}	
-	
-	//Delete Contact
-	public void delete(int id) {
+	}
+
+	public void delete(Integer id) {
 		contactRepository.deleteById(id);
 	}
 	
-	//Update Contact
-	public void save( Contact contact) {
-		contactRepository.save(contact);
-	}
-
 }

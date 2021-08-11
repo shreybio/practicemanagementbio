@@ -12,44 +12,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shreysambhwani.fleetapp.models.VehicleModel;
 import com.shreysambhwani.fleetapp.services.VehicleModelService;
-
+import java.util.List;
 @Controller
 public class VehicleModelController {
 
-	
-	@Autowired private VehicleModelService vehicleModelService;
-	
-	//Get All VehicleModels
-	@GetMapping("vehiclemodels")
-	public String findAll(Model model){		
-		model.addAttribute("vehicleModels", vehicleModelService.findAll());
+	@Autowired  private VehicleModelService vehicleModelService;
+
+	@GetMapping("/vehicleModels")
+	public String getVehicleModels(Model model) {		
+		
+		List<VehicleModel> vehicleModelList = vehicleModelService.getVehicleModels();	
+
+		model.addAttribute("vehicleModels", vehicleModelList);
 		return "vehicleModel";
 	}	
 	
-	@RequestMapping("vehicleModels/findById") 
-	@ResponseBody
-	public Optional<VehicleModel> findById(Integer id)
-	{
-		return vehicleModelService.findById(id);
-	}
-	
-	//Add VehicleModel
-	@PostMapping(value="vehicleModels/addNew")
+	@PostMapping("/vehicleModels/addNew")
 	public String addNew(VehicleModel vehicleModel) {
 		vehicleModelService.save(vehicleModel);
 		return "redirect:/vehicleModels";
+	}
+	
+	@RequestMapping("vehicleModels/findById")
+	@ResponseBody
+	public Optional<VehicleModel> findById(int id) {
+	  return vehicleModelService.findById(id);	
 	}	
 	
-	@RequestMapping(value="vehicleModels/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/vehicleModels/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(VehicleModel vehicleModel) {
 		vehicleModelService.save(vehicleModel);
 		return "redirect:/vehicleModels";
 	}
 	
-	@RequestMapping(value="vehicleModels/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/vehicleModels/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleModelService.delete(id);
 		return "redirect:/vehicleModels";
 	}
-
 }

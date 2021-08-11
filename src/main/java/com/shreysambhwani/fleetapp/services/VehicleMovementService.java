@@ -8,31 +8,29 @@ import org.springframework.stereotype.Service;
 
 import com.shreysambhwani.fleetapp.models.VehicleMovement;
 import com.shreysambhwani.fleetapp.repositories.VehicleMovementRepository;
-
 @Service
 public class VehicleMovementService {
+
 	
 	@Autowired
 	private VehicleMovementRepository vehicleMovementRepository;
 	
-	//Get All VehicleMovements
-	public List<VehicleMovement> findAll(){
+	//Return list of vehicleMovements
+	public List<VehicleMovement> getVehicleMovements(){
 		return vehicleMovementRepository.findAll();
-	}	
-	
-	//Get VehicleMovement By Id
-	public Optional<VehicleMovement> findById(int id) {
-		return vehicleMovementRepository.findById(id);
-	}	
-	
-	//Delete VehicleMovement
-	public void delete(int id) {
-		vehicleMovementRepository.deleteById(id);
 	}
 	
-	//Update VehicleMovement
+	//SAve new vehicleMovement
 	public void save(VehicleMovement vehicleMovement) {
 		vehicleMovementRepository.save(vehicleMovement);
 	}
+	
+	//get by id
+	public Optional<VehicleMovement> findById(int id) {
+		return vehicleMovementRepository.findById(id);
+	}
 
+	public void delete(Integer id) {
+		vehicleMovementRepository.deleteById(id);
+	}
 }

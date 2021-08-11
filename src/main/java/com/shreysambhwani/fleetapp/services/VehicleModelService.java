@@ -11,28 +11,26 @@ import com.shreysambhwani.fleetapp.repositories.VehicleModelRepository;
 
 @Service
 public class VehicleModelService {
-	
 	@Autowired
 	private VehicleModelRepository vehicleModelRepository;
 	
-	//Get All VehicleModels
-	public List<VehicleModel> findAll(){
+	//Return list of countries
+	public List<VehicleModel> getVehicleModels(){
 		return vehicleModelRepository.findAll();
-	}	
-	
-	//Get VehicleModel By Id
-	public Optional<VehicleModel> findById(int id) {
-		return vehicleModelRepository.findById(id);
-	}	
-	
-	//Delete VehicleModel
-	public void delete(int id) {
-		vehicleModelRepository.deleteById(id);
 	}
 	
-	//Update VehicleModel
+	//SAve new VehicleModel
 	public void save(VehicleModel vehicleModel) {
 		vehicleModelRepository.save(vehicleModel);
+	}
+	
+	//get by id
+	public Optional<VehicleModel> findById(int id) {
+		return vehicleModelRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleModelRepository.deleteById(id);
 	}
 
 }

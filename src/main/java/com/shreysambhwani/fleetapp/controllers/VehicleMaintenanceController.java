@@ -19,42 +19,42 @@ import com.shreysambhwani.fleetapp.services.VehicleService;
 public class VehicleMaintenanceController {
 
 	
-	@Autowired private VehicleMaintenanceService vehicleMaintenanceService;
-	@Autowired private VehicleService vehicleService;
-	@Autowired private SupplierService supplierService;
+	@Autowired	private VehicleMaintenanceService vehicleMaintenanceService;
+	@Autowired	private VehicleService vehicleService;
+	@Autowired	private SupplierService supplierService;
 
-	
-	//Get All VehicleMaintenances
-	@GetMapping("vehiclemaintenances")
-	public String findAll(Model model){		
-		model.addAttribute("vehicleMaintenances", vehicleMaintenanceService.findAll());
-		model.addAttribute("vehicles", vehicleService.findAll());
-		model.addAttribute("suppliers", supplierService.findAll());
 
-		return "vehicleMaintenance";
+	@GetMapping("/vehicleMaintenances")
+	public String getVehicleMaintenances(Model model) {		
+		model.addAttribute("vehicleMaintenances", vehicleMaintenanceService.getVehicleMaintenances());	
+		
+		model.addAttribute("vehicles", vehicleService.getVehicles());
+		model.addAttribute("suppliers", supplierService.getSuppliers());
+		
+
+		
+		return "VehicleMaintenance";
 	}	
 	
-	@RequestMapping("vehicleMaintenances/findById") 
-	@ResponseBody
-	public Optional<VehicleMaintenance> findById(Integer id)
-	{
-		return vehicleMaintenanceService.findById(id);
-	}
-	
-	//Add VehicleMaintenance
-	@PostMapping(value="vehicleMaintenances/addNew")
+	@PostMapping("/vehicleMaintenances/addNew")
 	public String addNew(VehicleMaintenance vehicleMaintenance) {
 		vehicleMaintenanceService.save(vehicleMaintenance);
 		return "redirect:/vehicleMaintenances";
+	}
+	
+	@RequestMapping("vehicleMaintenances/findById")
+	@ResponseBody
+	public Optional<VehicleMaintenance> findById(int id) {
+	  return vehicleMaintenanceService.findById(id);	
 	}	
 	
-	@RequestMapping(value="vehicleMaintenances/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/vehicleMaintenances/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(VehicleMaintenance vehicleMaintenance) {
 		vehicleMaintenanceService.save(vehicleMaintenance);
 		return "redirect:/vehicleMaintenances";
 	}
 	
-	@RequestMapping(value="vehicleMaintenances/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/vehicleMaintenances/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleMaintenanceService.delete(id);
 		return "redirect:/vehicleMaintenances";

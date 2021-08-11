@@ -17,45 +17,47 @@ import com.shreysambhwani.fleetapp.services.SupplierService;
 
 @Controller
 public class SupplierController {
-	
-	@Autowired private StateService stateService;
-	@Autowired private CountryService countryService;	
-	@Autowired private SupplierService supplierService;
-	
-	//Get All Suppliers
-	@GetMapping("suppliers")
-	public String findAll(Model model){		
-		model.addAttribute("countries", countryService.findAll());
-		model.addAttribute("states", stateService.findAll());
-		model.addAttribute("suppliers", supplierService.findAll());
-		return "supplier";
+
+
+	@Autowired	private SupplierService supplierService;
+	@Autowired	private CountryService countryService;
+	@Autowired	private StateService stateService;
+
+
+	@GetMapping("/suppliers")
+	public String getSuppliers(Model model) {		
+		model.addAttribute("suppliers", supplierService.getSuppliers());	
+		
+		model.addAttribute("countries", countryService.getCountries());
+		
+		model.addAttribute("states", stateService.getStates());
+
+		
+		return "Supplier";
 	}	
 	
-	@RequestMapping("suppliers/findById") 
-	@ResponseBody
-	public Optional<Supplier> findById(Integer id)
-	{
-		return supplierService.findById(id);
-	}
-	
-	//Add Supplier
-	@PostMapping(value="suppliers/addNew")
+	@PostMapping("/suppliers/addNew")
 	public String addNew(Supplier supplier) {
 		supplierService.save(supplier);
 		return "redirect:/suppliers";
+	}
+	
+	@RequestMapping("suppliers/findById")
+	@ResponseBody
+	public Optional<Supplier> findById(int id) {
+	  return supplierService.findById(id);	
 	}	
 	
-	@RequestMapping(value="suppliers/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/suppliers/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Supplier supplier) {
 		supplierService.save(supplier);
 		return "redirect:/suppliers";
 	}
 	
-	@RequestMapping(value="suppliers/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/suppliers/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		supplierService.delete(id);
 		return "redirect:/suppliers";
 	}
-
-
+	
 }

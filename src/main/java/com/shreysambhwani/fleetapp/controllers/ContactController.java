@@ -20,40 +20,42 @@ import com.shreysambhwani.fleetapp.services.StateService;
 @Controller
 public class ContactController {
 	
-	@Autowired private StateService stateService;
-	@Autowired private CountryService countryService;	
-	@Autowired private ContactService contactService;
-	
-	//Get All Contacts
+	@Autowired	private ContactService contactService;
+	@Autowired	private CountryService countryService;
+	@Autowired	private StateService stateService;
+
+
 	@GetMapping("/contacts")
-	public String findAll(Model model){		
-		model.addAttribute("countries", countryService.findAll());
-		model.addAttribute("states", stateService.findAll());
-		model.addAttribute("contacts", contactService.findAll());
-		return "contact";
+	public String getContacts(Model model) {		
+		model.addAttribute("contacts", contactService.getContacts());	
+		
+		model.addAttribute("countries", countryService.getCountries());
+		
+		model.addAttribute("states", stateService.getStates());
+
+		
+		return "Contact";
 	}	
 	
-	@RequestMapping("contacts/findById") 
-	@ResponseBody
-	public Optional<Contact> findById(Integer id)
-	{
-		return contactService.findById(id);
-	}
-	
-	//Add Contact
-	@PostMapping(value="contacts/addNew")
+	@PostMapping("/contacts/addNew")
 	public String addNew(Contact contact) {
 		contactService.save(contact);
 		return "redirect:/contacts";
+	}
+	
+	@RequestMapping("contacts/findById")
+	@ResponseBody
+	public Optional<Contact> findById(int id) {
+	  return contactService.findById(id);	
 	}	
 	
-	@RequestMapping(value="contacts/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/contacts/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Contact contact) {
 		contactService.save(contact);
 		return "redirect:/contacts";
 	}
 	
-	@RequestMapping(value="contacts/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/contacts/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		contactService.delete(id);
 		return "redirect:/contacts";

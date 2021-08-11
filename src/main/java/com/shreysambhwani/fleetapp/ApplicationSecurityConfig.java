@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Configuration
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -54,7 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		provider.setUserDetailsService(userDetailsService);
 		
-		provider.setPasswordEncoder(passwordEncoder());
+		provider.setPasswordEncoder(bCryptPasswordEncoder());
 		
 		return provider;
 	}

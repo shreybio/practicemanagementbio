@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shreysambhwani.fleetapp.models.Country;
 import com.shreysambhwani.fleetapp.models.Location;
 import com.shreysambhwani.fleetapp.services.CountryService;
 import com.shreysambhwani.fleetapp.services.LocationService;
@@ -20,47 +21,45 @@ import com.shreysambhwani.fleetapp.services.StateService;
 
 @Controller
 public class LocationController {
-	
-	@Autowired	private LocationService locationService;
-	@Autowired	private CountryService countryService;
+
 	@Autowired	private StateService stateService;
-	
-	@GetMapping("locations")
-	public String findAll(Model model){
-		model.addAttribute("locations", locationService.findAll());
-		model.addAttribute("countries", countryService.findAll());
-		model.addAttribute("states", stateService.findAll());
+	@Autowired	private CountryService countryService;
+	@Autowired  private LocationService locationService;
 
+	@GetMapping("/locations")
+	public String getStates(Model model) {		
+		
+		//List<State> stateList = stateService.getStates();	
+		List<Country> countryList = countryService.getCountries();
+		List<Location> locationList = locationService.getLocations();
+		
+		model.addAttribute("countries", countryList);
+		model.addAttribute("locations", locationList);	
+		//model.addAttribute("states", stateList);
 		return "location";
-	}
+	}	
 	
-	@GetMapping("/findById")
-	@ResponseBody
-	public Optional<Location> findById(Integer id) {
-		return locationService.findById(id);
-	}		
-	
-	@GetMapping("/findByDescriptionContaining/{description}")
-	public List<Location> findByDescriptionContaining(@PathVariable("description") String description) {
-		return locationService.findByDescriptionContaining(description);
-	}
-
-	@PostMapping("/addNew")
-	public String save(Location location) {
+	@PostMapping("/locations/addNew")
+	public String addNew(Location location) {
 		locationService.save(location);
 		return "redirect:/locations";
 	}
-
-	@RequestMapping(value="/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	
+	@RequestMapping("locations/findById")
+	@ResponseBody
+	public Optional<Location> findById(int id) {
+	  return locationService.findById(id);	
+	}	
+	
+	@RequestMapping(value="/locations/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Location location) {
 		locationService.save(location);
 		return "redirect:/locations";
 	}
 	
-	@RequestMapping(value="/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String deleteById(Integer id) {
-		locationService.deleteById(id);
+	@RequestMapping(value="/locations/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete(Integer id) {
+		locationService.delete(id);
 		return "redirect:/locations";
 	}
-	
 }

@@ -11,32 +11,32 @@ import com.shreysambhwani.fleetapp.repositories.EmployeeRepository;
 
 @Service
 public class EmployeeService {
-		
+	
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	//Get All Employees
-	public List<Employee> findAll(){
+	//Return list of employees
+	public List<Employee> getEmployees(){
 		return employeeRepository.findAll();
-	}	
-	
-	//Get Employee By Id
-	public Optional<Employee> findById(int id) {
-		return employeeRepository.findById(id);
-	}	
-	
-	//Delete Employee
-	public void delete(int id) {
-		employeeRepository.deleteById(id);
 	}
 	
-	//Update Employee
-	public void save( Employee employee) {
+	//SAve new employee
+	public void save(Employee employee) {
 		employeeRepository.save(employee);
 	}
 	
-	//Get Employee by username
-	public Employee findByUsername(String un) {
-		return employeeRepository.findByUsername(un);
+	//get by id
+	public Optional<Employee> findById(int id) {
+		return employeeRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		employeeRepository.deleteById(id);
+	}
+	
+	//Get employees by keyword
+	public List<Employee> findByKeyword(String keyword){
+		return employeeRepository.findByKeyword(keyword);
+		
 	}
 }

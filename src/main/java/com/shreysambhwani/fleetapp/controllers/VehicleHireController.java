@@ -18,48 +18,46 @@ import com.shreysambhwani.fleetapp.services.VehicleService;
 
 @Controller
 public class VehicleHireController {
-	
-	@Autowired private VehicleHireService vehicleHireService;
-	@Autowired private ClientService clientService;
-	@Autowired private LocationService locationService;
-	@Autowired private VehicleService vehicleService;
-	
-	//Get All VehicleHires
-	@GetMapping("vehiclehires")
-	public String findAll(Model model){		
-		model.addAttribute("vehicleHires", vehicleHireService.findAll());
-		model.addAttribute("clients", clientService.findAll());
-		model.addAttribute("locations", locationService.findAll());
-		model.addAttribute("vehicles", vehicleService.findAll());
+
+
+	@Autowired  private VehicleHireService vehicleHireService;
+	@Autowired  private VehicleService vehicleService;
+	@Autowired  private LocationService locationService;
+	@Autowired  private ClientService clientService;
+
+
+	@GetMapping("/vehicleHires")
+	public String getVehicleHires(Model model) {		
+		
+		model.addAttribute("vehicleHires", vehicleHireService.getVehicleHires());
+		model.addAttribute("vehicles", vehicleService.getVehicles());
+		model.addAttribute("locations", locationService.getLocations());
+		model.addAttribute("clients", clientService.getClients());
 
 		return "vehicleHire";
 	}	
 	
-	@RequestMapping("vehicleHires/findById") 
-	@ResponseBody
-	public Optional<VehicleHire> findById(Integer id)
-	{
-		return vehicleHireService.findById(id);
-	}
-	
-	//Add VehicleHire
-	@PostMapping(value="vehicleHires/addNew")
+	@PostMapping("/vehicleHires/addNew")
 	public String addNew(VehicleHire vehicleHire) {
 		vehicleHireService.save(vehicleHire);
 		return "redirect:/vehicleHires";
+	}
+	
+	@RequestMapping("vehicleHires/findById")
+	@ResponseBody
+	public Optional<VehicleHire> findById(int id) {
+	  return vehicleHireService.findById(id);	
 	}	
 	
-	@RequestMapping(value="vehicleHires/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/vehicleHires/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(VehicleHire vehicleHire) {
 		vehicleHireService.save(vehicleHire);
 		return "redirect:/vehicleHires";
 	}
 	
-	@RequestMapping(value="vehicleHires/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/vehicleHires/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleHireService.delete(id);
 		return "redirect:/vehicleHires";
 	}
-
-
 }

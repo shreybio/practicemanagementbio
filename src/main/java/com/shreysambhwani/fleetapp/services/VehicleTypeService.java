@@ -10,28 +10,26 @@ import com.shreysambhwani.fleetapp.repositories.VehicleTypeRepository;
 
 @Service
 public class VehicleTypeService {
-	
 	@Autowired
 	private VehicleTypeRepository vehicleTypeRepository;
 	
-	//Get All VehicleTypes
-	public List<VehicleType> findAll(){
+	//Return list of 
+	public List<VehicleType> getVehicleTypes(){
 		return vehicleTypeRepository.findAll();
-	}	
-	
-	//Get VehicleType By Id
-	public Optional<VehicleType> findById(int id) {
-		return vehicleTypeRepository.findById(id);
-	}	
-	
-	//Delete VehicleType
-	public void delete(int id) {
-		vehicleTypeRepository.deleteById(id);
 	}
 	
-	//Update VehicleType
+	//SAve new VehicleType
 	public void save(VehicleType vehicleType) {
 		vehicleTypeRepository.save(vehicleType);
+	}
+	
+	//get by id
+	public Optional<VehicleType> findById(int id) {
+		return vehicleTypeRepository.findById(id);
+	}
+
+	public void delete(Integer id) {
+		vehicleTypeRepository.deleteById(id);
 	}
 
 }

@@ -21,53 +21,59 @@ import com.shreysambhwani.fleetapp.services.VehicleTypeService;
 
 @Controller
 public class VehicleController {
+
+	//Vehicles
+	//Location
+	//Employee
+	//Vehicle Make
+	//Vehicle Status
+	//Vehicle Type
+	//Vehicle Model
 	
-	@Autowired private VehicleService vehicleService;
-	@Autowired private VehicleTypeService vehicleTypeService;
-	@Autowired private VehicleMakeService vehicleMakeService;
-	@Autowired private VehicleModelService vehicleModelService;
-	@Autowired private LocationService locationService;
-	@Autowired private EmployeeService employeeService ;
-	@Autowired private VehicleStatusService vehicleStatusService;
+	@Autowired	private VehicleService vehicleService;
+	@Autowired	private LocationService locationService;
+	@Autowired	private EmployeeService employeeService;
+	@Autowired	private VehicleMakeService vehicleMakeService;
+	@Autowired	private VehicleStatusService vehicleStatusService;
+	@Autowired	private VehicleTypeService vehicleTypeService;
+	@Autowired	private VehicleModelService vehicleModelService;
 
 
-	//Get All Vehicles
-	@GetMapping("vehicles")
-	public String findAll(Model model){		
-		model.addAttribute("vehicles", vehicleService.findAll());
-		model.addAttribute("vehicleTypes", vehicleTypeService.findAll());
-		model.addAttribute("vehicleModels", vehicleModelService.findAll());
-		model.addAttribute("vehicleMakes", vehicleMakeService.findAll());
-		model.addAttribute("locations", locationService.findAll());
-		model.addAttribute("employees", employeeService.findAll());
-		model.addAttribute("vehicleStatuses", vehicleStatusService.findAll());
-
-		return "vehicle";
+	@GetMapping("/vehicles")
+	public String getVehicles(Model model) {	
+		
+		model.addAttribute("vehicles", vehicleService.getVehicles());			
+		model.addAttribute("locations", locationService.getLocations());		
+	    model.addAttribute("employees", employeeService.getEmployees());
+		model.addAttribute("vehicleMakes", vehicleMakeService.getVehicleMakes());			
+		model.addAttribute("vehicleStatuses", vehicleStatusService.getVehicleStatuses());		
+		model.addAttribute("vehicleTypes", vehicleTypeService.getVehicleTypes());
+		model.addAttribute("vehicleModels", vehicleModelService.getVehicleModels());				
+		return "Vehicle";
 	}	
 	
-	@RequestMapping("vehicles/findById") 
-	@ResponseBody
-	public Optional<Vehicle> findById(Integer id)
-	{
-		return vehicleService.findById(id);
-	}
-	
-	//Add Vehicle
-	@PostMapping(value="vehicles/addNew")
+	@PostMapping("/vehicles/addNew")
 	public String addNew(Vehicle vehicle) {
 		vehicleService.save(vehicle);
 		return "redirect:/vehicles";
+	}
+	
+	@RequestMapping("vehicles/findById")
+	@ResponseBody
+	public Optional<Vehicle> findById(int id) {
+	  return vehicleService.findById(id);	
 	}	
 	
-	@RequestMapping(value="vehicles/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="/vehicles/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Vehicle vehicle) {
 		vehicleService.save(vehicle);
 		return "redirect:/vehicles";
 	}
 	
-	@RequestMapping(value="vehicles/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="/vehicles/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleService.delete(id);
 		return "redirect:/vehicles";
 	}
+	
 }
