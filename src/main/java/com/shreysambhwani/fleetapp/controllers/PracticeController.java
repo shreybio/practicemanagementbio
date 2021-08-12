@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shreysambhwani.fleetapp.models.Employee;
+import com.shreysambhwani.fleetapp.models.Practice;
 import com.shreysambhwani.fleetapp.services.CountryService;
-import com.shreysambhwani.fleetapp.services.EmployeeService;
+import com.shreysambhwani.fleetapp.services.PracticeService;
 import com.shreysambhwani.fleetapp.services.EmployeeTypeService;
 import com.shreysambhwani.fleetapp.services.JobTitleService;
 import com.shreysambhwani.fleetapp.services.StateService;
@@ -22,7 +22,7 @@ public class PracticeController {
 	
 
 	
-	@Autowired	private EmployeeService employeeService;
+	@Autowired	private PracticeService practiceService;
 	@Autowired	private JobTitleService jobTitleService;
 	@Autowired	private EmployeeTypeService employeeTypeService;
 	@Autowired	private CountryService countryService;
@@ -32,7 +32,7 @@ public class PracticeController {
 	
 	
 
-	@GetMapping("/employees")
+	@GetMapping("/practices")
 	public String getEmployees(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
@@ -41,17 +41,17 @@ public class PracticeController {
 		model.addAttribute("states", stateService.getStates());		
 
 		if(keyword != null){
-			model.addAttribute("employees", employeeService.findByKeyword(keyword));
+			model.addAttribute("practices", practiceService.findByKeyword(keyword));
 		}
 		else 
 		{
-		     model.addAttribute("employees", employeeService.getEmployees());			
+		     model.addAttribute("practices", practiceService.getEmployees());			
 		}
 		
-		return "Employee";
+		return "Practice";
 	}	
 	
-	@GetMapping("/employeesFiltered")
+	@GetMapping("/practicesFiltered")
 	public String getEmployeesFiltered(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
@@ -59,35 +59,35 @@ public class PracticeController {
 		model.addAttribute("countries", countryService.getCountries());			
 		model.addAttribute("states", stateService.getStates());		
 
-	   model.addAttribute("employees", employeeService.getEmployees());			
+	   model.addAttribute("practices", practiceService.getEmployees());			
 
 		
-		return "EmployeeFiltered";
+		return "practicesFiltered";
 	}
 	
 	
 	
-	@PostMapping("/employees/addNew")
-	public String addNew(Employee employee) {
-		employeeService.save(employee);
-		return "redirect:/employees";
+	@PostMapping("/practices/addNew")
+	public String addNew(Practice practice) {
+		practiceService.save(practice);
+		return "redirect:/practices";
 	}
 	
-	@RequestMapping("employees/findById")
+	@RequestMapping("practices/findById")
 	@ResponseBody
-	public Optional<Employee> findById(int id) {
-	  return employeeService.findById(id);	
+	public Optional<Practice> findById(int id) {
+	  return practiceService.findById(id);	
 	}	
 	
-	@RequestMapping(value="/employees/update", method= {RequestMethod.PUT, RequestMethod.GET})
-	public String update(Employee employee) {
-		employeeService.save(employee);
+	@RequestMapping(value="/practices/update", method= {RequestMethod.PUT, RequestMethod.GET})
+	public String update(Practice practice) {
+		practiceService.save(practice);
 		return "redirect:/employees";
 	}
 	
-	@RequestMapping(value="/employees/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
+	@RequestMapping(value="/practices/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
-		employeeService.delete(id);
+		practiceService.delete(id);
 		return "redirect:/employees";
 	}
 	

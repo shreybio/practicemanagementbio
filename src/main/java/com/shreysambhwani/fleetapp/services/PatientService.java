@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shreysambhwani.fleetapp.models.Employee;
-import com.shreysambhwani.fleetapp.repositories.EmployeeRepository;
+import com.shreysambhwani.fleetapp.models.Patient;
+import com.shreysambhwani.fleetapp.repositories.PatientRepository;
 
 @Service
 public class PatientService {
@@ -21,7 +21,7 @@ public class PatientService {
 	}
 	
 	//SAve new employee
-	public void save({Patient patient) {
+	public void save(Patient patient) {
 		patientRepository.save(patient);
 	}
 	
@@ -35,7 +35,7 @@ public class PatientService {
 	}
 	
 	//Get employees by keyword
-	public List<Patieny> findByKeyword(String keyword){
+	public List<Patient> findByKeyword(String keyword){
 		return patientRepository.findByKeyword(keyword);
 		
 	}

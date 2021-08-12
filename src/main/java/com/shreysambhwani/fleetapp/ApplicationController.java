@@ -11,6 +11,11 @@ public class ApplicationController {
 		return "index";
 	}
 	
+	@GetMapping("/indexbio")
+	public String goHome2() {
+		return "indexbio";
+	}
+	
 	@GetMapping("/login")
 	public String login() {
 		return "login";

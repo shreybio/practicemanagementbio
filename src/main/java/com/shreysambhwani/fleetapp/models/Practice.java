@@ -20,26 +20,26 @@ import lombok.EqualsAndHashCode;
 public class Practice extends Person {
 		
 	@ManyToOne
-	@JoinColumn(name="employeetypeid", insertable=false, updatable=false)
-	private EmployeeType employeeType;
-	private Integer employeetypeid;
+	@JoinColumn(name="practicetypeid", insertable=false, updatable=false)
+	private EmployeeType practiceType;
+	private Integer practicetypeid;
 	private String photo;
 	private String username;
 	
 	public EmployeeType getEmployeeType() {
-		return employeeType;
+		return practiceType;
 	}
 
-	public void setEmployeeType(EmployeeType employeeType) {
-		this.employeeType = employeeType;
+	public void setEmployeeType(EmployeeType practiceType) {
+		this.practiceType = practiceType;
 	}
 
-	public Integer getEmployeetypeid() {
-		return employeetypeid;
+	public Integer getPatienttypeid() {
+		return practicetypeid;
 	}
 
-	public void setEmployeetypeid(Integer employeetypeid) {
-		this.employeetypeid = employeetypeid;
+	public void setPatienttypeid(Integer employeetypeid) {
+		this.practicetypeid = practicetypeid;
 	}
 
 	public String getPhoto() {

@@ -34,11 +34,11 @@ public class Patient extends Person {
 		this.patientType = patientType;
 	}
 
-	public Integer getEmployeetypeid() {
+	public Integer getPatienttypeid() {
 		return patienttypeid;
 	}
 
-	public void setEmployeetypeid(Integer patienttypeid) {
+	public void setPatienttypeid(Integer patienttypeid) {
 		this.patienttypeid = patienttypeid;
 	}
 

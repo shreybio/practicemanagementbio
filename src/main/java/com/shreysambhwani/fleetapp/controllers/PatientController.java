@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shreysambhwani.fleetapp.models.Employee;
+import com.shreysambhwani.fleetapp.models.Patient;
 import com.shreysambhwani.fleetapp.services.CountryService;
-import com.shreysambhwani.fleetapp.services.EmployeeService;
+import com.shreysambhwani.fleetapp.services.PatientService;
 import com.shreysambhwani.fleetapp.services.EmployeeTypeService;
 import com.shreysambhwani.fleetapp.services.JobTitleService;
 import com.shreysambhwani.fleetapp.services.StateService;
@@ -22,7 +22,7 @@ public class PatientController {
 	
 
 	
-	@Autowired	private EmployeeService employeeService;
+	@Autowired	private PatientService patientService;
 	@Autowired	private JobTitleService jobTitleService;
 	@Autowired	private EmployeeTypeService employeeTypeService;
 	@Autowired	private CountryService countryService;
@@ -32,7 +32,7 @@ public class PatientController {
 	
 	
 
-	@GetMapping("/employees")
+	@GetMapping("/patients")
 	public String getEmployees(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
@@ -41,17 +41,17 @@ public class PatientController {
 		model.addAttribute("states", stateService.getStates());		
 
 		if(keyword != null){
-			model.addAttribute("employees", employeeService.findByKeyword(keyword));
+			model.addAttribute("patients",patientService.findByKeyword(keyword));
 		}
 		else 
 		{
-		     model.addAttribute("employees", employeeService.getEmployees());			
+		     model.addAttribute("patients", patientService.getPatients());			
 		}
 		
-		return "Employee";
+		return "Patient";
 	}	
 	
-	@GetMapping("/employeesFiltered")
+	@GetMapping("/patientsFiltered")
 	public String getEmployeesFiltered(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
@@ -59,36 +59,36 @@ public class PatientController {
 		model.addAttribute("countries", countryService.getCountries());			
 		model.addAttribute("states", stateService.getStates());		
 
-	   model.addAttribute("employees", employeeService.getEmployees());			
+	   model.addAttribute("patients", patientService.getPatients());			
 
 		
-		return "EmployeeFiltered";
+		return "PatientFiltered";
 	}
 	
 	
 	
-	@PostMapping("/employees/addNew")
-	public String addNew(Employee employee) {
-		employeeService.save(employee);
-		return "redirect:/employees";
+	@PostMapping("/patients/addNew")
+	public String addNew(Patient patient) {
+		patientService.save(patient);
+		return "redirect:/patients";
 	}
 	
-	@RequestMapping("employees/findById")
+	@RequestMapping("patients/findById")
 	@ResponseBody
-	public Optional<Employee> findById(int id) {
-	  return employeeService.findById(id);	
+	public Optional<Patient> findById(int id) {
+	  return patientService.findById(id);	
 	}	
 	
-	@RequestMapping(value="/employees/update", method= {RequestMethod.PUT, RequestMethod.GET})
-	public String update(Employee employee) {
-		employeeService.save(employee);
-		return "redirect:/employees";
+	@RequestMapping(value="/patients/update", method= {RequestMethod.PUT, RequestMethod.GET})
+	public String update(Patient patient) {
+		patientService.save(patient);
+		return "redirect:/patients";
 	}
 	
-	@RequestMapping(value="/employees/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
+	@RequestMapping(value="/patients/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
-		employeeService.delete(id);
-		return "redirect:/employees";
+		patientService.delete(id);
+		return "redirect:/patients";
 	}
 	
 
