@@ -41,7 +41,7 @@
 <body>
   <!-- container section start -->
   <section id="container" class="">
-    <!--header start-->
+
 
     <header class="header dark-bg">
       <div class="toggle-nav">
@@ -49,10 +49,9 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Bio <span class="lite">Telemetry</span></a>
-      <!--logo end-->
+      <a href="index.html" class="logo" style="color:darkturquoise" >Bio <span class="lite">Telemetry</span></a>
 
-<div class="nav search-row" id="top_menu">
+      <div class="nav search-row" id="top_menu">
         <!--  search form start -->
         <ul class="nav top-menu">
           <li>
@@ -68,16 +67,16 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          <!-- task notificatoin start -->
+<!--          <!-- task notificatoin start --
           <li id="task_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-task-l"></i>
-                            <span class="badge bg-important">5</span>
+                            <span class="badge bg-important">6</span>
                         </a>
             <ul class="dropdown-menu extended tasks-bar">
               <div class="notify-arrow notify-arrow-blue"></div>
               <li>
-                <p class="blue">You have 5 pending tasks</p>
+                <p class="blue">You have 6 pending letter</p>
               </li>
               <li>
                 <a href="#">
@@ -152,8 +151,8 @@
               </li>
             </ul>
           </li>
-          <!-- task notificatoin end -->
-          <!-- inbox notificatoin start-->
+          <!-- task notificatoin end --
+          <!-- inbox notificatoin start--
           <li id="mail_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
@@ -217,8 +216,8 @@
               </li>
             </ul>
           </li>
-          <!-- inbox notificatoin end -->
-          <!-- alert notification start-->
+          <!-- inbox notificatoin end --
+          <!-- alert notification start--
           <li id="alert_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
@@ -268,9 +267,9 @@
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
-                            </span>
-                            <span class="username">Jenifer Smith</span>
+ <!--                               <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} + '.jpg'}" height="38" width="38">
+       -->                     </span>
+                            <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">
@@ -305,7 +304,7 @@
     </header>
     <!--header end-->
 
-    <!--sidebar start-->
+ <!--sidebar start-->
     <aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
@@ -316,85 +315,24 @@
                           <span>Dashboard</span>
                       </a>
           </li>
+          <li class="active">
+            <a class="" th:href="@{/indexbio}">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard Bio</span>
+                      </a>
+          </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
-                          <span>Vehicles</span>
+                          <span>BioTel</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" th:href="@{/vehicles}">Vehicle Data</a></li>
-              <li><a class="" th:href="@{/vehicleMaintenances}">Maintenance</a></li>
-              <li><a class="" th:href="@{/vehicleMovements}">Movements</a></li>
-              <li><a class="" th:href="@{/vehicleHires}">Hires</a></li>
+              <li><a class="" th:href="@{/patients}">Patients</a></li>
+              <li><a class="" th:href="@{/practices}">Practices</a></li>
+              <li><a class="" th:href="@{/locations}">Locations</a></li>
             </ul>
           </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>Parameters</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" th:href="@{/vehicleMakes}">Vehicle Make</a></li>
-              <li><a class="" th:href="@{/vehicleTypes}">Vehicle Types</a></li>
-              <li><a class="" th:href="@{/vehicleModels}">Vehicle Models</a></li>
-              <li><a class="" th:href="@{/vehicleStatuses}">Status Values</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>People</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" th:href="@{/employees}">Employees</a></li>
-              <li><a class="" th:href="@{/clients}">Clients</a></li>
-              <li><a class="" th:href="@{/suppliers}">Suppliers</a></li>
-              <li><a class="" th:href="@{/contacts}">Contacts</a></li>
-              <li><a class="" th:href="@{/users}">User</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>HR Settings</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" th:href="@{/jobTitles}">Job Titles</a></li>
-              <li><a class="" th:href="@{/employeeTypes}">Employee Types</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
-                          <span>Accounts</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" th:href="@{/invoices}">Invoices</a></li>
-              <li><a class="" th:href="@{/invoiceStatuses}">Invoice Status Values</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_documents_alt"></i>
-                          <span>Globals</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" th:href="@{/countries}">Countries</a></li>
-              <li><a class="" th:href="@{/states}"><span>States</span></a></li>
-              <li><a class="" th:href="@{/locations}"><span>Locations</span></a></li>
-
-            </ul>
-          </li>
-
-        </ul>
         <!-- sidebar menu end-->
       </div>
     </aside>
