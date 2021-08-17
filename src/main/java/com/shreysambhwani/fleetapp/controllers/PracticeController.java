@@ -33,7 +33,7 @@ public class PracticeController {
 	
 
 	@GetMapping("/practices")
-	public String getEmployees(Model model, String keyword) {	
+	public String getPractices(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
 	    model.addAttribute("employeeTypes", employeeTypeService.getEmployeeTypes());
@@ -45,21 +45,21 @@ public class PracticeController {
 		}
 		else 
 		{
-		     model.addAttribute("practices", practiceService.getEmployees());			
+		     model.addAttribute("practices", practiceService.getPractices());			
 		}
 		
 		return "Practice";
 	}	
 	
 	@GetMapping("/practicesFiltered")
-	public String getEmployeesFiltered(Model model, String keyword) {	
+	public String getPracticesFiltered(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
 	    model.addAttribute("employeeTypes", employeeTypeService.getEmployeeTypes());
 		model.addAttribute("countries", countryService.getCountries());			
 		model.addAttribute("states", stateService.getStates());		
 
-	   model.addAttribute("practices", practiceService.getEmployees());			
+	   model.addAttribute("practices", practiceService.getPractices());			
 
 		
 		return "practicesFiltered";
@@ -82,13 +82,13 @@ public class PracticeController {
 	@RequestMapping(value="/practices/update", method= {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Practice practice) {
 		practiceService.save(practice);
-		return "redirect:/employees";
+		return "redirect:/practices";
 	}
 	
 	@RequestMapping(value="/practices/delete", method= {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		practiceService.delete(id);
-		return "redirect:/employees";
+		return "redirect:/practices";
 	}
 	
 

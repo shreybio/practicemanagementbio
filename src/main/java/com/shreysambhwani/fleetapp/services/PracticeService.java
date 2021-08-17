@@ -16,7 +16,7 @@ public class PracticeService {
 	private PracticeRepository practiceRepository;
 	
 	//Return list of employees
-	public List<Practice> getEmployees(){
+	public List<Practice> getPractices(){
 		return practiceRepository.findAll();
 	}
 	

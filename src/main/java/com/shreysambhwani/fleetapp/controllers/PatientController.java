@@ -33,7 +33,7 @@ public class PatientController {
 	
 
 	@GetMapping("/patients")
-	public String getEmployees(Model model, String keyword) {	
+	public String getPatients(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
 	    model.addAttribute("employeeTypes", employeeTypeService.getEmployeeTypes());
@@ -52,7 +52,7 @@ public class PatientController {
 	}	
 	
 	@GetMapping("/patientsFiltered")
-	public String getEmployeesFiltered(Model model, String keyword) {	
+	public String getPatientsFiltered(Model model, String keyword) {	
 		
 		model.addAttribute("jobTitles", jobTitleService.getJobTitles());		
 	    model.addAttribute("employeeTypes", employeeTypeService.getEmployeeTypes());

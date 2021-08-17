@@ -13,7 +13,7 @@ import com.shreysambhwani.fleetapp.models.Practice;
 public interface PracticeRepository extends JpaRepository<Practice, Integer> {
 	
 	
-	@Query(value="select * from Employee e where e.firstname like %:keyword%  or e.lastname like %:keyword%", nativeQuery=true)
+	@Query(value="select * from Practice e where e.firstname like %:keyword%  or e.lastname like %:keyword%", nativeQuery=true)
 	List<Practice> findByKeyword(@Param("keyword") String keyword);
 
 }

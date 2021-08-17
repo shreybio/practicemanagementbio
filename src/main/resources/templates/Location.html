@@ -445,17 +445,6 @@
 				   </option>
 			    </select>				    
 		  </div>
-
-         <div class="form-group">
-		    <label for="ddlStateAdd" class="col-form-label">State: </label>
-			    <select class="form-control" id="ddlStateAdd" name="stateid">
-			       <option>-SELECT-</option>			    
-			       <option th:each="state : ${states}"
-				        th:value="${state.id}"
-				        th:text="${state.name}">
-				   </option>
-			    </select>				    
-		  </div>
           
           <div class="form-group">
             <label for="detailsAdd" class="col-form-label">Details:</label>
@@ -515,17 +504,6 @@
 			    </select>				    
 		  </div>
 
-         <div class="form-group">
-		    <label for="ddlStateEdit" class="col-form-label">State: </label>
-			    <select class="form-control" id="ddlStateEdit" name="stateid">
-			       <option>-SELECT-</option>
-			       <option th:each="state : ${states}"
-				        th:value="${state.id}"
-				        th:text="${state.name}">
-				   </option>
-			    </select>				    
-		  </div>
-          
           <div class="form-group">
             <label for="detailsAdd" class="col-form-label">Details:</label>
             <input type="text" class="form-control" id="detailsEdit" name="details">

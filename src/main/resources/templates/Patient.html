@@ -361,7 +361,7 @@
               </header>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New</button>
 				
-				<form th:action="@{/employees}" method="get">
+				<form th:action="@{/patients}" method="get">
 					<input id="txtSearch" type="text" name="keyword">
 					<button type="submit">Go</button>
 				</form>
@@ -371,28 +371,28 @@
                   <tr>
                   <th>Photo</th>
                     <th><i class="icon_profile"></i> Full Name</th>
-                    <th><i class="icon_calendar"></i>Hire Date</th>
+                    <th><i class="icon_calendar"></i>Treatment Start Date</th>
                     <th><i class="icon_mail_alt"></i> Email</th>
                     <th><i class="icon_pin_alt"></i> City</th>
                     <th><i class="icon_mobile"></i> Phone</th>
                     <th><i class="icon_cogs"></i> Action</th>
                   </tr>
-				 <tr th:each="employee:${employees}">	
+				 <tr th:each="patient:${patients}">	
 				      <td>
-						 <a id="photoButton" th:href="@{'/img/photos/' + ${employee.username} +'.jpg'}">
-						 <img th:src="@{'/img/photos/' + ${employee.username} +'.jpg'}" width="40" height="40">
+						 <a id="photoButton" th:href="@{'/img/' + ${patient.firstname} +'.jpg'}">
+						 <img th:src="@{'/img/' + ${patient.firstname} +'.jpg'}" width="40" height="40">
 						 </a>
 					 </td>
-					<td th:text="${employee.firstname} + ' ' + ${employee.lastname}">Fullname</td>
-					<td th:text="${employee.hireDate}">HireDate</td>
-					<td th:text="${employee.email}">Email</td>
-					<td th:text="${employee.city}">City</td>
-					<td th:text="${employee.phone}">Phone</td>					
+					<td th:text="${patient.firstname} + ' ' + ${patient.lastname}">Fullname</td>
+					<td th:text="${patient.hireDate}">Treatment Start date</td>
+					<td th:text="${patient.email}">Email</td>
+					<td th:text="${patient.city}">City</td>
+					<td th:text="${patient.phone}">Phone</td>					
                     <td>
                       <div class="btn-group">
-                        <a class="btn btn-primary" id="editButton" th:href="@{/employees/findById/(id=${employee.id})}"><i class="icon_pencil-edit"></i></a>
-                        <a class="btn btn-success" id="detailsButton" th:href="@{/employees/findById/(id=${employee.id})}"><i class="icon_document_alt"></i></a>
-                        <a class="btn btn-danger" id="deleteButton" th:href="@{/employees/delete/(id=${employee.id})}"><i class="icon_close_alt2"></i></a>
+                        <a class="btn btn-primary" id="editButton" th:href="@{/patients/findById/(id=${patient.id})}"><i class="icon_pencil-edit"></i></a>
+                        <a class="btn btn-success" id="detailsButton" th:href="@{/patients/findById/(id=${patient.id})}"><i class="icon_document_alt"></i></a>
+                        <a class="btn btn-danger" id="deleteButton" th:href="@{/patients/delete/(id=${patient.id})}"><i class="icon_close_alt2"></i></a>
                       </div>
                     </td>
                   </tr>
@@ -423,11 +423,11 @@
   
   
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <form th:action="@{/employees/addNew}" method="post">
+ <form th:action="@{/patients/addNew}" method="post">
   <div class="modal-dialog modal-lg" role="document" style="width:70%">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Employee Record</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Patient Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -461,9 +461,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtSSNAdd" class="col-sm-4 col-form-label">Social Security No.: </label>
+				    <label for="txtSSNAdd" class="col-sm-4 col-form-label">Patient ID: </label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="txtSSNAdd" name="socialSecurityNumber" placeholder="Social Security Number">
+				      <input type="text" class="form-control" id="txtSSNAdd" name="socialSecurityNumber" placeholder="Patient ID">
 				    </div>
 				  </div>
 				  <div class="form-group row">
@@ -507,9 +507,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtAddressAdd" class="col-sm-4 col-form-label">Address</label>
+				    <label for="txtAddressAdd" class="col-sm-4 col-form-label">Physician Remarks</label>
 				    <div class="col-sm-6">
-				      <textarea class="form-control" id="txtAddressAdd" name="address" placeholder="Address" rows="2"></textarea>
+				      <textarea class="form-control" id="txtAddressAdd" name="address" placeholder="Physician Remarks" rows="2"></textarea>
 				    </div>
 				  </div>
 				</td>
@@ -521,9 +521,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtHireDateAdd" class="col-sm-4 col-form-label">Hire Date:</label>
+				    <label for="txtHireDateAdd" class="col-sm-4 col-form-label">Treatment Start Date:</label>
 				    <div class="col-sm-6">
-				      <input type="date" class="form-control" id="txtHireDateAdd" name="hireDate" placeholder="Hire Date">
+				      <input type="date" class="form-control" id="txtHireDateAdd" name="hireDate" placeholder="Treatment Start Date">
 				    </div>
 				  </div>
 				  <div class="form-group row">
@@ -573,27 +573,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="ddlJobTitleAdd" class="col-sm-4 col-form-label">Job Title</label>
+				    <label for="flpImageEdit" class="col-sm-4 col-form-label">Select Image: </label>
 				    <div class="col-sm-6">
-					    <select class="form-control" id="ddlJobTitleAdd" name="jobtitleid">
-		        	       <option>-SELECT-</option>			    					  					    					    
-					       <option th:each="jobTitle : ${jobTitles}"
-						        th:value="${jobTitle.id}"
-						        th:text="${jobTitle.description}">
-						   </option>					    
-						 </select>				    
-				    </div>
-				  </div>
-				  <div class="form-group row">
-				    <label for="ddlEmpoloyeeTypeAdd" class="col-sm-4 col-form-label">Employee Type</label>
-				    <div class="col-sm-6">
-					    <select class="form-control" id="ddlEmployeeTypeAdd" name="employeetypeid">
-		        	       <option>-SELECT-</option>			    					  					    					    
-					       <option th:each="employeeType : ${employeeTypes}"
-						        th:value="${employeeType.id}"
-						        th:text="${employeeType.description}">
-						   </option>					    
-						</select>				    
+				      <input type="file" class="form-control-file" id="fupImageEdit" name="photo" placeholder="Select File">
 				    </div>
 				  </div>
 
@@ -613,11 +595,11 @@
 </div>
   
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <form th:action="@{/employees/addNew}" method="post">
+ <form th:action="@{/patients/addNew}" method="post">
   <div class="modal-dialog modal-lg" role="document" style="width:70%">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Employee Record</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Patient Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -651,9 +633,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtSSNEdit" class="col-sm-4 col-form-label">Social Security No.: </label>
+				    <label for="txtSSNEdit" class="col-sm-4 col-form-label">Patient ID: </label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="txtSSNEdit" name="socialSecurityNumber" placeholder="Social Security Number">
+				      <input type="text" class="form-control" id="txtSSNEdit" name="socialSecurityNumber" placeholder="Patient ID">
 				    </div>
 				  </div>
 				  <div class="form-group row">
@@ -697,9 +679,9 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtAddressEdit" class="col-sm-4 col-form-label">Address</label>
+				    <label for="txtAddressEdit" class="col-sm-4 col-form-label">Physician Remarks</label>
 				    <div class="col-sm-6">
-				      <textarea class="form-control" id="txtAddressEdit" name="address" placeholder="Address" rows="2"></textarea>
+				      <textarea class="form-control" id="txtAddressEdit" name="address" placeholder="Physician Remarks" rows="2"></textarea>
 				    </div>
 				  </div>
 				</td>
@@ -711,7 +693,7 @@
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="txtHireDateEdit" class="col-sm-4 col-form-label">Hire Date:</label>
+				    <label for="txtHireDateEdit" class="col-sm-4 col-form-label">Treatment Start Date:</label>
 				    <div class="col-sm-6">
 				      <input type="date" class="form-control" id="txtHireDateEdit" name="hireDate" placeholder="Hire Date">
 				    </div>
@@ -760,30 +742,6 @@
 				    <label for="txtEmailEdit" class="col-sm-4 col-form-label">Email</label>
 				    <div class="col-sm-6">
 				      <input type="email" class="form-control" id="txtEmailEdit" name="email" placeholder="Email">
-				    </div>
-				  </div>
-				  <div class="form-group row">
-				    <label for="ddlJobTitleEdit" class="col-sm-4 col-form-label">Job Title</label>
-				    <div class="col-sm-6">
-					    <select class="form-control" id="ddlJobTitleEdit" name="jobtitleid">
-		        	       <option>-SELECT-</option>			    					  					    					    
-					       <option th:each="jobTitle : ${jobTitles}"
-						        th:value="${jobTitle.id}"
-						        th:text="${jobTitle.description}">
-						   </option>					    
-						 </select>				    
-				    </div>
-				  </div>
-				  <div class="form-group row">
-				    <label for="ddlEmployeeTypeEdit" class="col-sm-4 col-form-label">Employee Type</label>
-				    <div class="col-sm-6">
-					    <select class="form-control" id="ddlEmployeeTypeEdit" name="employeetypeid">
-		        	       <option>-SELECT-</option>			    					  					    					    
-					       <option th:each="employeeType : ${employeeTypes}"
-						        th:value="${employeeType.id}"
-						        th:text="${employeeType.description}">
-						   </option>					    
-						</select>				    
 				    </div>
 				  </div>
 				  <div class="form-group row">
